@@ -1,0 +1,112 @@
+You need to add the Adafruit Neopixel library for these examples, there are other libraries you can try of course -
+
+Example 1
+
+#include <Adafruit_NeoPixel.h>
+
+#define PIN   D4
+#define LED_NUM 7
+
+// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
+Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_NUM, PIN, NEO_GRB + NEO_KHZ800);
+
+
+void setup() 
+{
+  leds.begin(); // This initializes the NeoPixel library.
+}
+
+
+
+void led_set(uint8 R, uint8 G, uint8 B) 
+{
+  for (int i = 0; i < LED_NUM; i++) 
+  {
+    leds.setPixelColor(i, leds.Color(R, G, B));
+    leds.show();
+    delay(150);
+  }
+}
+
+void loop() {
+
+  led_set(10, 0, 0);//red
+  led_set(0, 0, 0);
+
+  led_set(0, 10, 0);//green
+  led_set(0, 0, 0);
+
+  led_set(0, 0, 10);//blue
+  led_set(0, 0, 0);
+
+}
+
+Example 2
+
+#include <Adafruit_NeoPixel.h>
+
+#define PIN   D4
+#define LED_NUM 7
+
+// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
+Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_NUM, PIN, NEO_GRB + NEO_KHZ800);
+
+
+void setup() 
+{
+  leds.begin(); // This initializes the NeoPixel library.
+}
+
+
+
+void loop() 
+{
+  for (int i = 0; i < LED_NUM; i++) 
+  {
+  leds.setPixelColor(i, leds.Color(10, 0, 0));
+  leds.show();
+  delay(250);
+
+  leds.setPixelColor(i, leds.Color(0, 10, 0));
+  leds.show();
+  delay(250);
+
+  leds.setPixelColor(i, leds.Color(0, 0, 10));
+  leds.show();
+  delay(250);
+  }
+}
+
+Example 3
+
+My favourite this one
+
+#include <Adafruit_NeoPixel.h>
+
+#define PIN   D4
+#define LED_NUM 7
+
+// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
+Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_NUM, PIN, NEO_GRB + NEO_KHZ800);
+
+
+void setup() 
+{
+  leds.begin(); // This initializes the NeoPixel library.
+  Serial.begin(9600);
+  randomSeed(analogRead(A0));
+}
+
+
+void loop() 
+{
+  //you can make the colours 255 but that is bright
+  int redRandom = random(10);
+  int greenRandom = random(10);
+  int blueRandom = random(10);
+  int ledRandom = random(7);
+  leds.setPixelColor(ledRandom, leds.Color(redRandom, greenRandom, blueRandom));
+  leds.show();
+  delay(250);
+}
+

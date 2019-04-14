@@ -1,0 +1,57 @@
+Example 1
+#include <Adafruit_NeoPixel.h>
+
+#define PIN            D2
+
+// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
+
+void setup() 
+{
+  pixels.begin(); // This initializes the NeoPixel library.
+}
+
+void loop() 
+{
+  // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+  pixels.setPixelColor(0, pixels.Color(2, 0, 0)); // red
+  pixels.show(); // This sends the updated pixel color to the hardware.
+  delay(1000); // Delay for a period of time (in milliseconds).
+  pixels.setPixelColor(0, pixels.Color(0, 2, 0)); // green
+  pixels.show(); // This sends the updated pixel color to the hardware.
+  delay(1000); // Delay for a period of time (in milliseconds).
+  pixels.setPixelColor(0, pixels.Color(0, 0, 2)); // blue
+  pixels.show(); // This sends the updated pixel color to the hardware.
+  delay(1000); // Delay for a period of time (in milliseconds).
+}
+
+
+Example 2
+This example will create some random numbers from 0 to 4 and then flash the RGB LED with the values.
+#include <Adafruit_NeoPixel.h>
+
+#define PIN            D2
+
+long randomRed;
+long randomGreen;
+long randomBlue;
+// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
+
+void setup() 
+{
+  pixels.begin(); // This initializes the NeoPixel library.
+  Serial.begin(9600);
+  randomSeed(analogRead(0));
+}
+
+void loop() 
+{
+  // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+  randomRed = random(0, 4);
+  randomGreen = random(0, 4);
+  randomBlue = random(0, 4);
+  pixels.setPixelColor(0, pixels.Color(randomRed, randomGreen, randomBlue)); // red
+  pixels.show(); // This sends the updated pixel color to the hardware.
+  delay(1000); // Delay for a period of time (in milliseconds).
+}

@@ -1,0 +1,88 @@
+This requires the library from https://github.com/wemos/WEMOS_Matrix_LED_Shield_Arduino_Library There are a couple of built in examples but here are a few examples that will flash various LEDs
+
+#include <WEMOS_Matrix_LED.h>
+
+MLED mled(5); //set intensity=5
+
+void setup()
+{
+
+}
+
+void loop() {
+
+  for(int y=0;y<8;y++)
+  {
+    for(int x=0;x<8;x++)
+    {
+        mled.dot(x,y); // draw dot
+        mled.display();
+        delay(200);      
+    }  
+  }
+}
+
+#include <WEMOS_Matrix_LED.h>
+
+MLED mled(5); //set intensity=5
+
+void setup()
+{
+
+}
+
+void loop() {
+
+for(int y=0;y<8;y++)
+{
+mled.dot(0,y); // draw dot
+mled.display();
+delay(200);
+}
+}
+
+#include <WEMOS_Matrix_LED.h>
+
+MLED mled(5); //set intensity=5
+int randX, randY;
+
+void setup()
+{
+Serial.begin(9600);
+randomSeed(analogRead(0));
+
+}
+
+void loop()
+{
+randX = random(8);
+randY = random(8);
+mled.dot(randX,randY); // draw dot
+mled.display();
+delay(200);
+}
+
+#include <WEMOS_Matrix_LED.h>
+
+MLED mled(5); //set intensity=5
+int randX, randY;
+
+void setup()
+{
+Serial.begin(9600);
+randomSeed(analogRead(0));
+
+}
+
+void loop()
+{
+randX = random(8);
+randY = random(8);
+mled.dot(randX,randY); // draw dot
+mled.display();
+delay(200);
+mled.dot(randX,randY,0);//clear dot
+mled.display();
+delay(200);
+}
+
