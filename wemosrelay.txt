@@ -1,0 +1,15 @@
+#define PIN D1 // Relay shield is controlled by digital pin D1
+ 
+void setup()
+ 
+{
+  pinMode(PIN, OUTPUT); // Set the pin to an output
+}
+ 
+void loop()
+{
+  digitalWrite(PIN, HIGH); // switch on the relay
+  delay(1000); // Wait for another second
+  digitalWrite(PIN, LOW); // switch off the relay
+  delay(1000); // Wait for a second
+}

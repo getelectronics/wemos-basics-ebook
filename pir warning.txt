@@ -1,0 +1,31 @@
+const int PIR = D3;
+int PIRState = 0;
+int buzzer=D5; //Buzzer control port, default D5
+
+void setup() 
+{
+  pinMode(PIR, INPUT);
+  pinMode(buzzer, OUTPUT);
+  digitalWrite(buzzer, LOW);
+  // set initial state, LED off
+  digitalWrite(BUILTIN_LED, HIGH);
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  PIRState = digitalRead(PIR);
+
+
+  if (PIRState == HIGH) 
+  {
+    analogWrite(buzzer, 512); // buzzer on
+    Serial.write("INTRUDER DETECTED\n");
+  } 
+  else 
+  {
+    digitalWrite(buzzer, LOW); // buzzer off
+    Serial.write("NOWT GOING ON\n");
+  }
+  delay(1000);
+}

@@ -1,0 +1,40 @@
+#include <Wire.h>
+#include <Adafruit_BMP085.h>
+#include "Adafruit_SHT31.h"
+#include <Arduino.h>
+
+Adafruit_BMP085 bmp;
+Adafruit_SHT31 sht31 = Adafruit_SHT31();
+
+void setup() 
+{
+  Serial.begin(9600);
+  //start bmp180
+  Serial.println("SHT30 and BMP180 comparison test");
+  if (!bmp.begin()) 
+  {
+    Serial.println("Could not find BMP180 or BMP085 sensor at 0x77");
+    while (1) {}
+  }
+  //start sht30
+  if (! sht31.begin(0x45)) {   // Set to 0x44 for alternate i2c addr
+    Serial.println("Couldn't find SHT30");
+    while (1) delay(1);
+  }
+}
+
+void loop() 
+{
+  float t = sht31.readTemperature();
+  
+  Serial.print("BMP180 Temperature = ");
+  Serial.print(bmp.readTemperature());
+  Serial.println(" Celsius");
+  
+  Serial.print("SHT30 Temperature = ");
+  Serial.print(t);
+  Serial.println(" Celsius");
+
+  Serial.println();
+  delay(1000);
+}
